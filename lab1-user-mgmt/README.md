@@ -1,8 +1,8 @@
-#Lab 1: Linux User Management, Sudo Configuration & SSH Hardening
+# Lab 1: Linux User Management, Sudo Configuration & SSH Hardening
 
 Goal: Create and manage Linux users and groups, configure role-based sudo access, enable password complexity, and harden SSH access on Ubuntu in a controlled VirtualBox lab.
 
-##Architecture
+## Architecture
 
 Hypervisor: VirtualBox (Adapter 1: NAT, Adapter 2: Host-Only)
 
@@ -10,7 +10,7 @@ Windows 11 Host (used for SSH testing attempts)
 
 Ubuntu Server (Host-Only IP: 192.168.56.x)
 
-##Steps I Performed
+## Steps I Performed
 
 Verified Ubuntu system information and network adapters:
 
@@ -76,7 +76,7 @@ VirtualBox Host-Only connectivity issue prevented successful remote SSH
 
 Ubuntu-side hardening validated and correct
 
-##Key Findings
+## Key Findings
 
 RBAC via Linux groups (opsadmin, devteam, analytics) simplifies permission management and mirrors real enterprise structures.
 
@@ -88,7 +88,7 @@ Disabling PermitRootLogin significantly reduces attack surface and prevents brut
 
 SSH configuration and service validation succeeded; networking limitation was isolated to VirtualBox Host-Only adapter.
 
-##Screenshots & Commands
+## Screenshots & Commands
 
 System Info: system-info.png
 
