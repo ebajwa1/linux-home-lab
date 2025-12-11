@@ -1,105 +1,48 @@
 # Lab 1: Linux User Management, Sudo Configuration & SSH Hardening
 
-Goal: Create and manage Linux users and groups, configure role-based sudo access, enable password complexity, and harden SSH access on Ubuntu in a controlled VirtualBox lab.
+Goal: Create and manage Linux users and groups, configure role-based sudo access, enforce password complexity, and harden SSH access on Ubuntu in a VirtualBox environment.
 
 ## Architecture
-
-Hypervisor: VirtualBox (Adapter 1: NAT, Adapter 2: Host-Only)
-
-Windows 11 Host (used for SSH testing attempts)
-
-Ubuntu Server (Host-Only IP: 192.168.56.x)
+- Hypervisor: VirtualBox (Adapter 1: NAT, Adapter 2: Host-Only)
+- Windows 11 Host (used for SSH testing attempts)
+- Ubuntu Server VM (Host-Only IP: 192.168.56.x)
+- Users Created: alice (opsadmin), bob (devteam), carol (analytics)
 
 ## Steps I Performed
+1. Verified Ubuntu system information and network interfaces.  
+   - Screenshot: [system-info](./screenshots/system-info.png)
 
-Verified Ubuntu system information and network adapters:
+2. Created role-based groups (opsadmin, devteam, analytics).  
+   - Screenshot: [groups-created](./screenshots/groups-created.png)
 
-Commands used: lsb_release -a, hostnamectl, ip a
+3. Created users and assigned group memberships.  
+   - Screenshot: [users-and-groups](./screenshots/users-and-groups.png)
 
-Screenshot: system-info.png
+4. Enabled password complexity using `libpam-pwquality`.  
+   - Screenshot: [pwquality-config](./screenshots/pwquality-config.png)
 
-Created three role-based groups for RBAC modeling:
+5. Configured sudo privileges using visudo.  
+   - Screenshot (sudoers file): [sudoers-config](./screenshots/sudoers-config.png)  
+   - Screenshot (alice sudo test): [sudo-test-alice](./screenshots/sudo-test-alice.png)
 
-opsadmin, devteam, analytics
+6. Hardened SSH configuration by editing `sshd_config`.  
+   - Screenshot: [sshd-config](./screenshots/sshd-config.png)
 
-Verified with getent group
-
-Screenshot: groups-created.png
-
-Created users and assigned them to appropriate groups:
-
-Users: alice, bob, carol
-
-Used: adduser, usermod -aG <group> <user>
-
-Verified with id <user>
-
-Screenshot: users-and-groups.png
-
-Enabled password complexity using PAM module:
-
-Installed: libpam-pwquality
-
-Updated /etc/security/pwquality.conf for stronger password rules
-
-Screenshot: pwquality-config.png
-
-Configured sudo privileges with visudo:
-
-Added rule for operations administrators:
-
-%opsadmin   ALL=(ALL:ALL) ALL
-
-
-Tested sudo access as alice using sudo id
-
-Screenshots: sudoers-config.png, sudo-test-alice.png
-
-Hardened SSH configuration by editing /etc/ssh/sshd_config:
-
-Updated settings:
-
-PermitRootLogin no
-PasswordAuthentication yes
-PubkeyAuthentication yes
-
-
-Restarted SSH and confirmed service status
-
-Screenshot: sshd-config.png
-
-Attempted SSH login from Windows → Ubuntu:
-
-SSH daemon active and listening
-
-VirtualBox Host-Only connectivity issue prevented successful remote SSH
-
-Ubuntu-side hardening validated and correct
+7. Attempted SSH from Windows to Ubuntu.  
+   - SSH service active; connection blocked due to VirtualBox Host-Only network issue.
 
 ## Key Findings
-
-RBAC via Linux groups (opsadmin, devteam, analytics) simplifies permission management and mirrors real enterprise structures.
-
-Sudo delegation using %opsadmin ALL=(ALL:ALL) ALL provides secure, traceable admin access without enabling root login.
-
-libpam-pwquality enforces strong password policies aligned with security best practices.
-
-Disabling PermitRootLogin significantly reduces attack surface and prevents brute-force attacks on root.
-
-SSH configuration and service validation succeeded; networking limitation was isolated to VirtualBox Host-Only adapter.
+- Role-based groups simplify user and permission management.  
+- Sudo delegation using `%opsadmin ALL=(ALL:ALL) ALL` provides secure administrative access.  
+- Password complexity enforcement strengthens credential security.  
+- SSH hardening reduces attack surface by disabling remote root login.  
+- SSH configuration was correct; network issue was due to VirtualBox and not Linux.
 
 ## Screenshots & Commands
-
-System Info: ./screenshots/system-info.png
-
-Groups Created: groups-created.png
-
-User & Group Membership: users-and-groups.png
-
-Password Policy Config: pwquality-config.png
-
-Sudoers Configuration: sudoers-config.png
-
-Sudo Test (alice): sudo-test-alice.png
-
-SSH Hardening: sshd-config.png
+- System Info: [Screenshot](./screenshots/system-info.png)  
+- Groups Created: [Screenshot](./screenshots/groups-created.png)  
+- Users & Groups: [Screenshot](./screenshots/users-and-groups.png)  
+- Password Policy Config: [Screenshot](./screenshots/pwquality-config.png)  
+- Sudoers File: [Screenshot](./screenshots/sudoers-config.png)  
+- Sudo Test (alice): [Screenshot](./screenshots/sudo-test-alice.png)  
+- SSH Hardening: [Screenshot](./screenshots/sshd-config.png)
