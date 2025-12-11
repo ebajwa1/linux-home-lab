@@ -90,7 +90,7 @@ SSH configuration and service validation succeeded; networking limitation was is
 
 ## Screenshots & Commands
 
-System Info: system-info.png
+System Info: ./screenshots/system-info.png
 
 Groups Created: groups-created.png
 
