@@ -1,99 +1,105 @@
-Lab 1: Linux User Management, Sudo Configuration & SSH Hardening
+#Lab 1: Linux User Management, Sudo Configuration & SSH Hardening
 
-Goal: Create users, groups, enforce password policies, configure sudo using best practices, and harden SSH access on Ubuntu to simulate junior Linux administrator responsibilities.
+Goal: Create and manage Linux users and groups, configure role-based sudo access, enable password complexity, and harden SSH access on Ubuntu in a controlled VirtualBox lab.
 
-Architecture
+##Architecture
 
 Hypervisor: VirtualBox (Adapter 1: NAT, Adapter 2: Host-Only)
 
-Ubuntu Server: Host-Only IP: 192.168.56.x
+Windows 11 Host (used for SSH testing attempts)
 
-Windows 11 Host: Used for external connectivity testing
+Ubuntu Server (Host-Only IP: 192.168.56.x)
 
-Users Created: alice (opsadmin), bob (devteam), carol (analytics)
+##Steps I Performed
 
-Steps I Performed
+Verified Ubuntu system information and network adapters:
 
-Verified Ubuntu system info and networking:
+Commands used: lsb_release -a, hostnamectl, ip a
 
-Ran: lsb_release -a, hostnamectl, ip a
+Screenshot: system-info.png
 
-Confirmed correct hostname, OS version, NAT + Host-Only interfaces.
-
-Created role-based groups:
+Created three role-based groups for RBAC modeling:
 
 opsadmin, devteam, analytics
 
-Verified with: getent group opsadmin devteam analytics
+Verified with getent group
 
-Created users and assigned group memberships:
+Screenshot: groups-created.png
 
-Added: alice, bob, carol
+Created users and assigned them to appropriate groups:
 
-Assigned using: usermod -aG <group> <user>
+Users: alice, bob, carol
 
-Verified with: id alice, id bob, id carol
+Used: adduser, usermod -aG <group> <user>
 
-Enabled password complexity rules:
+Verified with id <user>
+
+Screenshot: users-and-groups.png
+
+Enabled password complexity using PAM module:
 
 Installed: libpam-pwquality
 
-Updated /etc/security/pwquality.conf for minimum length + mixed characters
+Updated /etc/security/pwquality.conf for stronger password rules
 
-Configured sudo privileges using visudo:
+Screenshot: pwquality-config.png
 
-Backed up /etc/sudoers
+Configured sudo privileges with visudo:
 
-Added:
+Added rule for operations administrators:
 
 %opsadmin   ALL=(ALL:ALL) ALL
 
 
-Tested admin access: su - alice → sudo id
+Tested sudo access as alice using sudo id
 
-Hardened SSH configuration:
+Screenshots: sudoers-config.png, sudo-test-alice.png
 
-Edited /etc/ssh/sshd_config:
+Hardened SSH configuration by editing /etc/ssh/sshd_config:
+
+Updated settings:
 
 PermitRootLogin no
 PasswordAuthentication yes
 PubkeyAuthentication yes
 
 
-Restarted SSH: sudo systemctl restart ssh
+Restarted SSH and confirmed service status
 
-SSH login test attempt:
+Screenshot: sshd-config.png
 
-Ubuntu SSH service active and listening
+Attempted SSH login from Windows → Ubuntu:
 
-Windows → Ubuntu SSH not reachable due to VirtualBox Host-Only network issue
+SSH daemon active and listening
 
-Ubuntu-side SSH hardening was successfully validated
+VirtualBox Host-Only connectivity issue prevented successful remote SSH
 
-Key Findings
+Ubuntu-side hardening validated and correct
 
-Role-based groups (opsadmin, devteam, analytics) simplify user permission management and reflect real enterprise RBAC structure.
+##Key Findings
 
-Using %opsadmin ALL=(ALL:ALL) ALL provides secure, auditable admin access instead of enabling root login.
+RBAC via Linux groups (opsadmin, devteam, analytics) simplifies permission management and mirrors real enterprise structures.
 
-Password rules via libpam-pwquality enforce strong credential hygiene required on production Linux servers.
+Sudo delegation using %opsadmin ALL=(ALL:ALL) ALL provides secure, traceable admin access without enabling root login.
 
-SSH hardening (PermitRootLogin no) significantly reduces remote attack surface and forces least-privilege logins.
+libpam-pwquality enforces strong password policies aligned with security best practices.
 
-SSH service was confirmed installed and running; networking prevented external connections, but configuration was correct.
+Disabling PermitRootLogin significantly reduces attack surface and prevents brute-force attacks on root.
 
-Screenshots
+SSH configuration and service validation succeeded; networking limitation was isolated to VirtualBox Host-Only adapter.
 
-System Info & Network — system-info.png
+##Screenshots & Commands
 
-Groups Created — groups-created.png
+System Info: system-info.png
 
-User/Group Membership — users-and-groups.png
+Groups Created: groups-created.png
 
-Password Policy Config — pwquality-config.png
+User & Group Membership: users-and-groups.png
 
-Sudoers Configuration — sudoers-config.png
+Password Policy Config: pwquality-config.png
 
-Sudo Test (alice) — sudo-test-alice.png
+Sudoers Configuration: sudoers-config.png
 
-SSH Hardening — sshd-config.png
+Sudo Test (alice): sudo-test-alice.png
+
+SSH Hardening: sshd-config.png
