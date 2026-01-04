@@ -6,7 +6,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 
 ---
 
-## 🖥️ Architecture
+##  Architecture
 - **Host OS:** Windows 11  
 - **Hypervisor:** VirtualBox  
 - **Virtual Machines:**  
@@ -17,7 +17,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 
 ---
 
-## 🔬 Labs
+##  Labs
 
 ### **Lab 1: Linux User Management, Sudo Configuration & SSH Hardening**
 **Goal:** Create and manage Linux users and groups, configure role-based sudo access, enforce password complexity, and harden SSH access on Ubuntu.
@@ -29,7 +29,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Hardened SSH by disabling root login and reviewing SSH settings
 - Tested SSH access from Windows host (network limitation documented)
 
-📂 Folder: `/lab1-linux-user-management`
+ Folder: `/lab1-linux-user-management`
 
 ---
 
@@ -43,7 +43,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Tested file creation behavior across users
 - Audited permissions using `stat`, `umask`, and `find`
 
-📂 Folder: `/lab2-linux-filesystem-permissions`
+ Folder: `/lab2-linux-filesystem-permissions`
 
 ---
 
@@ -57,11 +57,11 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Verified SSH logging verbosity (`LogLevel VERBOSE`)
 - Identified log patterns associated with brute-force and unauthorized access attempts
 
-📂 Folder: `/lab3-linux-ssh-log-analysis`
+ Folder: `/lab3-linux-ssh-log-analysis`
 
 ---
 
-## 📂 How to Use This Repository
+## How to Use This Repository
 Each lab folder contains:
 - Clear lab objectives and architecture
 - Step-by-step procedures
@@ -71,7 +71,7 @@ Each lab folder contains:
 
 ---
 
-## 🎯 Skills Demonstrated
+## Skills Demonstrated
 - Linux user and group administration
 - Role-based access control with sudo
 - Password policy enforcement
@@ -82,5 +82,5 @@ Each lab folder contains:
 
 ---
 
-## 📌 Notes
+## 
 This lab environment reflects real-world conditions, including documented networking limitations, emphasizing troubleshooting, validation, and accurate security analysis over idealized configurations.
