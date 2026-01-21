@@ -29,7 +29,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Hardened SSH by disabling root login and reviewing SSH settings
 - Tested SSH access from Windows host (network limitation documented)
 
- Folder: `/lab1-linux-user-management`
+ Folder: `/lab1-user-mgmt`
 
 ---
 
@@ -43,7 +43,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Tested file creation behavior across users
 - Audited permissions using `stat`, `umask`, and `find`
 
- Folder: `/lab2-linux-filesystem-permissions`
+ Folder: `/lab2-filesystem-permissions`
 
 ---
 
@@ -57,7 +57,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Verified SSH logging verbosity (`LogLevel VERBOSE`)
 - Identified log patterns associated with brute-force and unauthorized access attempts
 
- Folder: `/lab3-linux-ssh-log-analysis`
+ Folder: `/lab3-linux-log-analysis`
 
 ---
 
