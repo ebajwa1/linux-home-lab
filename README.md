@@ -29,7 +29,7 @@ Each lab includes step-by-step actions, commands, screenshots, and documented se
 - Hardened SSH by disabling root login and reviewing SSH settings
 - Tested SSH access from Windows host (network limitation documented)
 
- Folder: '/lab1-user-mgmt'
+ Folder: `/lab1-user-mgmt`
 
 ---
 
